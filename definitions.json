@@ -1,0 +1,73 @@
+{
+  "rabbit_version": "3.8.1",
+  "global_parameters": [
+    {"name": "cluster_name", "value": "cf-rabbitmq-c1"}
+  ],
+  "users": [
+    {
+      "name": "rabbitmq",
+      "password_hash": "z89J7698422aN9boZmJVfLDb6D6dpFS0xjJ7XMJOJU+wCTJW",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "configure": ".*",
+      "user": "rabbitmq",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "policies": [
+    {
+      "vhost": "/",
+      "name": "ha",
+      "pattern": "",
+      "definition": {
+        "ha-mode": "exactly",
+        "ha-params": 2,
+        "ha-sync-mode": "automatic",
+        "ha-sync-batch-size": 5
+      }
+    }
+  ],
+  "queues": [
+    {
+      "name": "q.user.created",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": true,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "e.user.created",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "e.user.created",
+      "vhost": "/",
+      "destination": "q.user.created",
+      "destination_type": "queue",
+      "routing_key": "user.created",
+      "arguments": {}
+    }
+  ]
+}	

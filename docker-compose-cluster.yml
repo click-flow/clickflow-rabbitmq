@@ -1,0 +1,41 @@
+version: '3.6'
+ 
+services:
+ 
+    rabbitmq-01:
+        image: clickflow/rabbitmq-cluster:3.8.1-management-alpine
+        hostname: cf-rabbitmq-01
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - cf-rabbitmq-1-data:/var/lib/rabbitmq
+        environment:
+            RABBITMQ_ERLANG_COOKIE: 1485a1412bbfc989264777cb01ddaf19
+        volumes:
+            - cf-rabbitmq-01-data:/var/lib/rabbitmq
+            - ./definitions.json:/etc/rabbitmq/definitions.json
+    rabbitmq-02:
+        image: clickflow/rabbitmq-cluster:3.8.1-management-alpine
+        hostname: cf-rabbitmq-02
+        environment:
+            RABBITMQ_ERLANG_COOKIE: 1485a1412bbfc989264777cb01ddaf19
+        volumes:
+            - cf-rabbitmq-02-data:/var/lib/rabbitmq
+            - ./config-cluster/definitions.json:/etc/rabbitmq/definitions.json
+    rabbitmq-03:
+        image: clickflow/rabbitmq-cluster:3.8.1-management-alpine
+        hostname: cf-rabbitmq-03
+        environment:
+            RABBITMQ_ERLANG_COOKIE: 1485a1412bbfc989264777cb01ddaf19
+        volumes:
+            - cf-rabbitmq-03-data:/var/lib/rabbitmq
+            - ./config-cluster/definitions.json:/etc/rabbitmq/definitions.json
+networks:
+    default:
+        name: rabbitmq-cluster
+                                                   
+volumes:
+    cf-rabbitmq-01-data: 
+    cf-rabbitmq-02-data: 
+    cf-rabbitmq-03-data: 

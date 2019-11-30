@@ -1,0 +1,17 @@
+version: '3.6'
+ 
+services:
+ 
+    rabbitmq:
+        image: clickflow/rabbitmq:3.8.1-management-alpine
+        hostname: cf-rabbitmq-1
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - cf-rabbitmq-1-data:/var/lib/rabbitmq
+            - ./definitions.json:/etc/rabbitmq/definitions.json:ro
+        environment:
+            RABBITMQ_ERLANG_COOKIE: 1485a1412bbfc989264777cb01ddaf19
+volumes:
+    cf-rabbitmq-1-data: 
