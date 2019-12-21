@@ -4,25 +4,25 @@ Docker files and docker-compose files for stand-alone and clustered RabbitMQ ins
 `docker-compose up`
 ## Example usage
 ### node.js:
-Start the example worker listener:
+Start the example worker listener:  
 `node worker.js`
 
-Queue up a task:
+Queue up a task:  
 `node tasker.js`
 
 ### ruby:
-Start the example worker listener:
+Start the example worker listener:  
 `ruby worker.rb`
 
-Queue up a task:
+Queue up a task:  
 `ruby tasker.rb`
 
 
 ### Python:
-Start the example worker listener:
+Start the example worker listener:  
 `python worker.py`
 
-Queue up a task:
+Queue up a task:  
 `python tasker.py`
 
 
